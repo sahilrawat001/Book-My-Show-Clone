@@ -6,7 +6,7 @@ return(
          <Navbar/> 
       
        {props.children}
-       <div>Footerses</div>
+       <div>Footer phns</div>
  
     </div>
 );

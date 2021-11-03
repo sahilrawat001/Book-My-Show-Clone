@@ -1,11 +1,53 @@
-import React from "react";
+import React ,{useContext,useEffect,useState} from  "react";
 import MovieHero from "../components/MovieHero/MovieHero.Component";
 import Slider from 'react-slick';
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { MovieContext } from "../Context/Movie.Context";
 import Cast from "../components/Cast/CastComponent";
 import PosterSlider from "../components/PosterSlider/PosterSlider.Components";
  
 
 const MoviePage = () => {
+
+    const { movie } = useContext(MovieContext);
+    const { id } = useParams();
+    const [cast, setCast] = useState([]);
+    const [similarMovies, setSimilarMovies] = useState([]);
+    const [recommended, setRecommended] = useState([]);
+
+    useEffect(() => {
+        const requestCast = async () => {
+            const getCast = await axios.get(`/movie/${id}/credits`);
+            setCast(getCast.data.cast);
+        };
+        requestCast();
+    }, [id]);
+
+    useEffect(() => {
+        const requestSimilarMovies = async () => {
+            const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
+            setSimilarMovies(getSimilarMovies.data.results);
+        };
+        requestSimilarMovies();
+    }, [id]);
+
+    useEffect(() => {
+        const requestRecommendedMovies = async () => {
+            const getRecommendedMovies = await axios.get(
+                `/movie/${id}/recommendations`
+            );
+            setRecommended(getRecommendedMovies.data.results);
+        };
+        requestRecommendedMovies();
+    }, [id]);
+
+
+
+
+
+
+
     const settingsCast = {
         infinite: false,
         speed: 500,
@@ -71,115 +113,7 @@ const MoviePage = () => {
             },
         ],
     };
-
-    const cast = [
-        {
-            profile_path:
-                "https://in.bmscdn.com/iedb/artist/images/website/poster/large/jodie-comer-iein098307-12-08-2021-12-19-44.jpg  ",
-            original_name: "Vin Diesel",
-            character: "Dominic Toretto",
-        },
-        {
-            profile_path:
-                "https://media.vanityfair.com/photos/5f6e0d388f3d1388648ddf94/4:3/w_1779,h_1334,c_limit/vin.jpg",
-            original_name: "Vin Diesel",
-            character: "Dominic Toretto",
-        },
-        {
-            profile_path:
-                "https://media.vanityfair.com/photos/5f6e0d388f3d1388648ddf94/4:3/w_1779,h_1334,c_limit/vin.jpg",
-            original_name: "Vin Diesel",
-            character: "Dominic Toretto",
-        },
-        {
-            profile_path:
-                "https://media.vanityfair.com/photos/5f6e0d388f3d1388648ddf94/4:3/w_1779,h_1334,c_limit/vin.jpg",
-            original_name: "Vin Diesel",
-            character: "Dominic Toretto",
-        },
-        {
-            profile_path:
-                "https://media.vanityfair.com/photos/5f6e0d388f3d1388648ddf94/4:3/w_1779,h_1334,c_limit/vin.jpg",
-            original_name: "Vin Diesel",
-            character: "Dominic Toretto",
-        },
-        {
-            profile_path:
-                "https://media.vanityfair.com/photos/5f6e0d388f3d1388648ddf94/4:3/w_1779,h_1334,c_limit/vin.jpg",
-            original_name: "Vin Diesel",
-            character: "Dominic Toretto",
-        },
-        {
-            profile_path:
-                "https://media.vanityfair.com/photos/5f6e0d388f3d1388648ddf94/4:3/w_1779,h_1334,c_limit/vin.jpg",
-            original_name: "Vin Diesel",
-            character: "Dominic Toretto",
-        },
-    ];
-
-    const similarMovies = [
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00312665-gbabdpvflx-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00312665-gbabdpvflx-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00312665-gbabdpvflx-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00312665-gbabdpvflx-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-
-
-
-        
-            {
-                src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00312665-gbabdpvflx-portrait.jpg",
-                title: "Fast and Furious 9",
-                subtitle: "Action / Adventure / Crime / Thriller",
-            },
-            {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00312665-gbabdpvflx-portrait.jpg",
-            title: "Fast and Furious 9",
-         
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-zbbswydmwv-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-zbbswydmwv-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-zbbswydmwv-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-zbbswydmwv-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-zbbswydmwv-portrait.jpg",
-            title: "Fast and Furious 9",
-            subtitle: "Action / Adventure / Crime / Thriller",
-        },
-    ];
-
+ 
 
 
 
@@ -191,11 +125,7 @@ const MoviePage = () => {
                     About the movie
                 </h1>
                 <p>
-                    Shang-Che and The Legend of The Ten Rings features Simu Liu as Shang-Chi,
-                    who must confront the past he thought he left behind when he is drawn into
-                    the web of the mysterious Ten Rings organization. The film is directed by
-                    Destin Daniel Cretton and produced by Kevin Feige and Jonathan Schwartz.
-                </p>
+                   {movie.overview}  </p>
             </div>
 
 
@@ -260,7 +190,7 @@ const MoviePage = () => {
                 <hr />
             </div>
           
-        <div castName='my-8'>
+        <div className='my-8'>
             <PosterSlider config={settings} title='Recommended Movies' posters={similarMovies} isDark={false} />
         </div>
   
@@ -271,7 +201,7 @@ const MoviePage = () => {
             <div className="my-8">
                 <hr />
             </div>
-            <PosterSlider config={settings} title='You might also like' posters={similarMovies} isDark={false} />
+            <PosterSlider config={settings} title='You might also like' posters={recommended} isDark={false} />
 
 
         </div>

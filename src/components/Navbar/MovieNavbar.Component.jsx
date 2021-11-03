@@ -1,10 +1,13 @@
-import React from "react";
+import React ,{useContext} from "react";
+import { Link } from "react-router-dom";
+import { MovieContext } from "../../Context/Movie.Context";
 import {BiSearch,BiMenu , BiChevronDown,  BiShareAlt} from 'react-icons/bi';
 function NavSm(){
+    const {movie}=useContext(MovieContext);
     return(<> 
     <div className='text-black flex items-center justify-between'>
         <div>
-<h3 className='text-xl font-bold  '> Fast and Furious 9</h3>
+<h3 className='text-xl font-bold  '> {movie.original_title}  </h3>
    
 
         </div>
@@ -21,10 +24,12 @@ function NavLg(){
     return<>
         <div className='container flex mx-auto px-4 items-center justify-between'>
             <div className='flex items-center w-1/2 gap-3'>
+            <Link to = {'/'} >
                 <div className='w-10 h-10'>
 
                 <img src='https://i.ibb.co/zPBYW3H/imgbin-bookmyshow-office-android-ticket-png.png ' alt='' className='w-full h-10'/>
                 </div>
+            </Link>    
                 <div className='   w-full flex items-center gap-3 bg-white  px-3 py-1 rounded-md'> 
                   <BiSearch/>
                   <input type ='search' className='w-full bg-transparent border-none focus:outline-none'

@@ -46,11 +46,11 @@ const {isDark, title,subtitle,posters,config }=props;
     return (
         <div className=''>
             <div className="   flex flex-col items-start my-2">
-          <h3 className={`text-2xl font-bold  ${
+          <h3 className={`text-2xl font-bold sm:text-xl ${
             isDark ?"text-white": "text-black"
           
           }  `}>
-         {title}
+         {title} 
            </h3>
         <p className={`text-sm ${ isDark ?"text-white": "text-black" }` }>
           {subtitle}   

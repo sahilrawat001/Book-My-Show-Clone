@@ -1,34 +1,28 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Movieinfo from "../Movieinfo.Component";
+import { MovieContext } from "../../Context/Movie.Context";
 const MovieHero=()=>{
-//  const [movie]=()=>  ( {
-//   id:"abcd",
-//   original_title:"Fast and Furious 9",
-//   overview:"2h 12m•Action,Adventure,Fantasy•UA•3 Sep, 2021",
-//   backdrop_path:"https://in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/fast-and-furious-9-et00056556-14-07-2021-07-41-33.jpg",
-//   poster_path:"https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/fast-and-furious-9-et00056556-14-07-2021-07-41-33.jpg",
 
+
+// const [movie] = useState({
+//   id: "asfasdf",
+//   original_title: "Fast and Furious 9",
+//   overview:
+//       "2h 23m • Action , Adventure , Crime , Thriller • UA • 2 Sep, 2021",
+//   backdrop_path:
+//       "https://in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/fast-and-furious-9-et00056556-14-07-2021-07-41-33.jpg",
+//   poster_path:
+//       "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/fast-and-furious-9-et00056556-14-07-2021-07-41-33.jpg",
 // });
 
-const [movie] = useState({
-  id: "asfasdf",
-  original_title: "Fast and Furious 9",
-  overview:
-      "2h 23m • Action , Adventure , Crime , Thriller • UA • 2 Sep, 2021",
-  backdrop_path:
-      "https://in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/fast-and-furious-9-et00056556-14-07-2021-07-41-33.jpg",
-  poster_path:
-      "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/fast-and-furious-9-et00056556-14-07-2021-07-41-33.jpg",
-});
-
-
-
+const {movie}=useContext(MovieContext);
+const genres= movie.genres?.map( ({name})=>name  ).join(',');
     return (<>
     <div>
 {/* Mobile version */}
 <div className='relative lg:hidden w-full' >
-  <img src={movie.backdrop_path}
-   alt='cover' className='m-4 rounded '
+  <img src={`https://image.tmdb.org/t/p/original${movie.poster_path} `}
+   alt='cover pic' className='m-4 rounded '
     style={{width: "calc(100% - 2rem)"}}
   />
 </div>
@@ -37,8 +31,8 @@ const [movie] = useState({
 
 <div className='text-black flex flex-col gap-2 md:px-4'>
   <h4>4k ratings</h4>
-  <h4>english,hindi,punjabi</h4>
-  <h4>{movie.overview}</h4>
+  <h4>     {movie.runtime} min • {genres}{" "} </h4>
+  <h4> hindi , punjabi </h4>
 </div>
 
 </div>
@@ -58,13 +52,13 @@ const [movie] = useState({
 
 <div className=' absolute z-30 left-24 top-10 flex items-center gap-10'>
   <div className='w-64 h-96'>
-    <img src={movie.poster_path} alt='Movie Poster'  className=' w-full h-full rounded-xl '/>
+    <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt='Movie Poster'  className=' w-full h-full rounded-xl '/>
   </div>
 <div className=''>
   <Movieinfo movie={movie} />
 </div>
 </div>
-<img src={movie.backdrop_path} alt='backdrop' className='w-full h-full'/>
+<img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt='backdrop' className='w-full h-full'/>
 </div>
     </div>
 

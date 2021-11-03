@@ -1,132 +1,37 @@
-import React from 'react'
+import axios from 'axios';
+import React,{useState,useEffect} from 'react'
 import EntertainmentCardSlider from '../components/Entertainment/Entertainment.Component';
 import HeroCarousel from '../components/HeroCarousel/HeroCarousel.Component';
 import PosterSlider from '../components/PosterSlider/PosterSlider.Components';
 
 export default function HomePage() {
-    const recommendedMovies = [
-     {
+    const [recommendedMovies,setRecommendedMovies] = useState([]);
 
-        src:  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzklICAyNmsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00117102-gukaentnqs-portrait.jpg",
-        title: "Fast and Furious 9",
-         subtitle:"Action/Crime  /Adventure"
-    },
-    {
-    
 
-        src:  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00310648-uwreepnzec-portrait.jpg",
-             title: "Fast and Furious 9",
-         subtitle:"Action/Crime/Adventure/etc"
-    },
-    {
-
-        src:  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzklICAyNmsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00117102-gukaentnqs-portrait.jpg",
-        title: "Fast and Furious 9 ",
-         subtitle:"Action/Crime  /Adventure"
-    },
-    {
-    
-
-        src:  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00310648-uwreepnzec-portrait.jpg",
-             title: "Fast and Furious 9",
-         subtitle:"Action/Crime    /Adventure"
-    },
-    {
-    
-        src:  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-OTElICAzNmsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00122566-njvxxykgbk-portrait.jpg",
-        title: "Fast and Furious 9",
-         subtitle:"Action/Crime    /Adventure"
-    },
-
-    {
-    
-        src:  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-OTElICAzNmsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00122566-njvxxykgbk-portrait.jpg",
-        title: "Fast and Furious 9",
-         subtitle:"Action/Crime/Adventure"
-    },
-
-     {
-
-        src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODElICAyayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00122449-cpycuxwnzs-portrait.jpg",
-        title: "Fast and Furious 9",
-         subtitle:"Action/Crime/Adventure"
-    },
-     
-        // "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzklICAyNmsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00117102-gukaentnqs-portrait.jpg",
-        // "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-OTElICAzNmsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00122566-njvxxykgbk-portrait.jpg",
-        //  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODMlICAzMjMgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00046420-wslwqardmc-portrait.jpg",
-        //  "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MTI5IGxpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70/et00314653-plbytmqdwv-portrait.jpg",
-        // "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODElICA1ayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00097273-gxsvmptdws-portrait.jpg",
-        // "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-NzclICAxNWsgdm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-fyrzjenkdc-portrait.jpg",
-        // "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00312484-ehedpyzcmm-portrait.jpg",
-        // "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00310648-uwreepnzec-portrait.jpg",
-    ];
-
-    const premierMovies = [
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00312484-ehedpyzcmm-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: " https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00304964-sppgefaccr-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00310648-uwreepnzec-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00137312-qszmhzktyk-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English..",
-        },
-        {
-            src: " https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00301282-dnzbnayacy-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "  https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00302306-xxwtjnexzz-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-    ];
-    const onlineStreamEvents = [
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00312484-ehedpyzcmm-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00137316-unmwlqfqvd-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00310648-uwreepnzec-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:oi-discovery-catalog@@icons@@premiere-icon.png,ox-322,oy-20/et00137312-qszmhzktyk-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-zbbswydmwv-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-        {
-            src: "https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@heart_202006300400.png,ox-24,oy-617,ow-29:ote-ODQlICAxayB2b3Rlcw%3D%3D,ots-29,otc-FFFFFF,oy-612,ox-70/et00056556-zbbswydmwv-portrait.jpg",
-            title: "The Nest",
-            subtitle: "English",
-        },
-    ];
-
+    const [premierMovies , setPremierMovies]=  useState([]);
+    const [onlineStreamEvents , setOnlineStreamEvents ]= useState([]);
+ 
+    useEffect( ()=>{
+        const requestPopuarMovies=async()=>{
+            const getPopularMovies= await axios.get('/movie/popular');
+        setRecommendedMovies(getPopularMovies.data.results);
+        };
+        requestPopuarMovies();
+    }, [] );
+    useEffect( ()=>{
+        const requestTopRateedMovies=async()=>{
+            const getTopRatedMovies= await axios.get('/movie/top_rated');
+        setPremierMovies(getTopRatedMovies.data.results);
+        };
+        requestTopRateedMovies();
+    }, [] );
+    useEffect( ()=>{
+        const requestUpcomingMovies=async()=>{
+            const getUpcomingMovies= await axios.get('/movie/upcoming');
+        setOnlineStreamEvents(getUpcomingMovies.data.results);
+        };
+        requestUpcomingMovies();
+    }, [] );
 
 
 
@@ -141,7 +46,7 @@ export default function HomePage() {
             </div>
             <div className='container mx-auto px-4 my-8'>      
             <PosterSlider
-            title= "Recommended Movies"
+            title= "Recommended Movies "
             subtitle="List of Recommended Movies "
             posters={recommendedMovies}
             isDark={false}

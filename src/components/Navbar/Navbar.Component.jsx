@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {BiSearch,BiMenu , BiChevronDown} from 'react-icons/bi';
 function NavSm(){
     return(<> 
@@ -22,10 +23,12 @@ Delhi NCR <BiChevronDown/>
 function NavMd(){
     return<>
          <div className='flex items-center w-full gap-3 px-2'>
+             <Link to = {'/'} >
          <div className='w-10 h-10'>
-
+           
 <img src='https://i.ibb.co/zPBYW3H/imgbin-bookmyshow-office-android-ticket-png.png ' alt='' className='w-full h-10 '/>
-</div>
+
+</div> </Link>
             <div className='   w-full flex items-center gap-3 bg-white  px-3 py-1 rounded-md'> 
                   <BiSearch className=' '/>
                   <input type ='search' className='w-full bg-transparent  border-none focus:outline-none'
